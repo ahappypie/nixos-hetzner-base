@@ -1,4 +1,4 @@
-{ config, lib, pkgs, modulesPath, system, ... }:
+{ config, lib, pkgs, modulesPath, ... }:
 
 {
   imports = [
@@ -11,5 +11,4 @@
   boot.extraModulePackages = [ ];
   swapDevices = [ ];
   networking.useDHCP = lib.mkDefault true;
-  nixpkgs.hostPlatform = lib.mkDefault system;
 }

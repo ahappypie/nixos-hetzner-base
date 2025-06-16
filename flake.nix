@@ -8,7 +8,7 @@
     };
   };
 
-  outputs = inputs@{ self, nixpkgs, ... }:
+  outputs = inputs@{ self, nixpkgs, disko, ... }:
     let
       allSystems = {
         x86_64-linux = { };
@@ -24,14 +24,14 @@
       );
 
       nixosConfigurations = {
-        hetzner-base = forAllSystems (system: nixpkgs.lib.nixosSystem {
-          inherit system;
+        hetzner-base = nixpkgs.lib.nixosSystem {
+          system = "x86_64-linux";
 
           modules = [
             ./configuration.nix
-            inputs.disko.nixosModules.disko
+            disko.nixosModules.disko
           ];
-        });
+        };
       };
 
       devShells = forAllSystems (
